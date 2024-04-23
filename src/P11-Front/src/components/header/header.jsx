@@ -1,4 +1,5 @@
 import "./header.css";
+import header_logo from "./argentBankLogo.png";
 
 export default function Header() {
   return (
@@ -7,10 +8,9 @@ export default function Header() {
         <a className="main-nav-logo">
           <img
             className="main-nav-logo-image"
-            src="./argentBankLogo.png"
+            src={header_logo}
             alt="Argent Bank Logo"
           />
-          <h1 className="sr-only">Argent Bank</h1>
         </a>
         <div>
           <a className="main-nav-item" href="./sign-in.html">
