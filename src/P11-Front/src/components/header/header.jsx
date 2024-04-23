@@ -13,7 +13,7 @@ export default function Header() {
           />
         </a>
         <div>
-          <a className="main-nav-item" href="./sign-in.html">
+          <a className="main-nav-item" href="">
             <i className="fa fa-user-circle"></i>
             Sign In
           </a>

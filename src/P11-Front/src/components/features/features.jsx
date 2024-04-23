@@ -6,7 +6,7 @@ export default function FeatureItem({ imageSrc, Title, Description }) {
     <>
       <div className="feature-item">
         <img src={imageSrc} alt={Title} className="feature-icon" />
-        <h3 className="feature-item-title">You are our #1 priority</h3>
+        <h3 className="feature-item-title">{Title}</h3>
         <p>{Description}</p>
       </div>
     </>
