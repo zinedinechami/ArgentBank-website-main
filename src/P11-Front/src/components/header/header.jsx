@@ -1,6 +1,8 @@
 import "./header.css";
 import header_logo from "./argentBankLogo.png";
 
+// ! temporary rederect towards user page, go back to login
+
 export default function Header() {
   return (
     <>
@@ -13,7 +15,7 @@ export default function Header() {
           />
         </a>
         <div>
-          <a className="main-nav-item" href="/signin">
+          <a className="main-nav-item" href="/user">
             <i className="fa fa-user-circle"></i>
             Sign In
           </a>

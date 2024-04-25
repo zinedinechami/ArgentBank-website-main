@@ -2,6 +2,8 @@ import "./signin.css";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
 
+// todo: appel API ici? store state dans redux
+
 export default function SignIn() {
   return (
     <>
