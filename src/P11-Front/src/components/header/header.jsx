@@ -15,7 +15,7 @@ export default function Header() {
           />
         </a>
         <div>
-          <a className="main-nav-item" href="/user">
+          <a className="main-nav-item" href="/signin">
             <i className="fa fa-user-circle"></i>
             Sign In
           </a>
