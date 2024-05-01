@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// todo: explain slice and modify it to your needs
+// todo: explain and create slice
 
 export const userSlice = createSlice({
   name: "user",

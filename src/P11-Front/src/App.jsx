@@ -4,8 +4,6 @@ import SignIn from "./pages/signin/signin";
 import User from "./pages/user/user";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-// todo: add sign in route
-
 const router = createBrowserRouter([
   {
     path: "/",

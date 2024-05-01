@@ -2,4 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 
 export default configureStore({});
 
-// thunk middleware?
+//  todo: finish creating store
+
+// ? thunk middleware
