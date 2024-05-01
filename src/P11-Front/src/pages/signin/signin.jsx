@@ -1,6 +1,7 @@
 import "./signin.css";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
+import { useState } from "react";
 
 // change sign in link to button for submit
 
@@ -14,6 +15,27 @@ import Footer from "../../components/footer/footer";
 // we need to save the token state through out the app with redux, to than show transactions
 
 export default function SignIn() {
+  const [user, setUser] = useState("");
+  const api_url = "http://localhost:3001/api/v1/user/login";
+
+  const submit = (e) => {
+    e.preventDefault();
+    fetch(api_url, {
+      method: "POST",
+      body: JSON.stringify({ user }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+      });
+
+    // .then(res => res.json())
+    // .then(json => setUser(json.user))
+  };
+
   return (
     <>
       <body>
@@ -22,7 +44,7 @@ export default function SignIn() {
           <section className="sign-in-content">
             <i className="fa fa-user-circle sign-in-icon"></i>
             <h1>Sign In</h1>
-            <form>
+            <form onSubmit={submit}>
               <div className="input-wrapper">
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" />
@@ -36,9 +58,7 @@ export default function SignIn() {
                 <label htmlFor="remember-me">Remember me</label>
               </div>
               {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-              <a href="./user" className="sign-in-button">
-                Sign In
-              </a>
+              <button className="sign-in-button">Sign In</button>
 
               {/* <!-- SHOULD BE THE BUTTON BELOW -->
           <!-- <button class="sign-in-button">Sign In</button> -->
