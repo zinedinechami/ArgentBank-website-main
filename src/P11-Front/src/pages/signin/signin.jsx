@@ -4,27 +4,38 @@ import Footer from "../../components/footer/footer";
 import { useState } from "react";
 
 // ?
-// mettre en place un appel api post
 // au onsubmit si les bonne info sont renvoyé on recupere le token et on le stock dans le state global
 // a la recupération du token on renvoie au dashbaord avec le token dans l'url
 // puis dans le dashboard on recupere les transactions depuis le state
 // we need to initialise a state, that when is updated with a token from api fetch, redirectes to dashboard
 // we need to save the token state through out the app with redux, to than show transactions
-
 // todo: explain the whole component
 
 export default function SignIn() {
-  const [user, setUser] = useState({ email: "", password: "" });
+  // initialiser le state du user prenant en compte un objet
+  // contenant les string du email, et du password attendu par la route de l'api et qu'on souhaite conserver dans le state global
+  const [user, setUser] = useState({ email: "", password: "", token: "" });
   const api_url = "http://localhost:3001/api/v1/user/login";
 
+  // function handleInput qui prend en compte l'event du changement d'input
   const handleInput = (e) => {
+    // quand un event se produit ici on veut se referer au nom et la valeur de l'input dans le form
     const { name, value } = e.target;
+    // puit on met a jour le state du user
+    // on utilise un spread operator pour copier l'etat initialise de user
+    // et puis on met a jour l'attribut name avec la nouvelle valeur obtenu par l'input
+    // permet de mettre a jour l'objet du state user
     setUser({ ...user, [name]: value });
   };
 
   const submit = (e) => {
     e.preventDefault();
-    const userValue = { email: user.email, password: user.password };
+    // objet recuperant le state du user avec les valeurs respectives pour le body de l'API
+    const userValue = {
+      email: user.email,
+      password: user.password,
+      token: user.token,
+    };
     fetch(api_url, {
       method: "POST",
       body: JSON.stringify(userValue),
@@ -33,6 +44,11 @@ export default function SignIn() {
       .then((response) => response.json())
       .then(function (data) {
         console.log(data);
+        window.location = "/user";
+        if (data.token) {
+          window.sessionStorage.setItem("token", user.token);
+          console.log(user.token);
+        }
       });
   };
 

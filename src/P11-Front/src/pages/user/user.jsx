@@ -7,7 +7,7 @@ import Header from "../../components/header/header";
 export default function User() {
   return (
     <>
-      <body>
+      <section>
         <Header />
         <main className="main bg-dark">
           <div className="header">
@@ -61,7 +61,7 @@ export default function User() {
           </section>
         </main>
         <Footer />
-      </body>
+      </section>
     </>
   );
 }
