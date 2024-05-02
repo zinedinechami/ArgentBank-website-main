@@ -38,7 +38,7 @@ export default function SignIn() {
 
   return (
     <>
-      <body>
+      <section>
         <Header />
         <main className="main bg-dark">
           <section className="sign-in-content">
@@ -48,9 +48,10 @@ export default function SignIn() {
               <div className="input-wrapper">
                 <label htmlFor="username">Username</label>
                 <input
-                  type="text"
+                  type="email"
                   id="username"
-                  // value={user.email}
+                  name="email"
+                  value={user.email}
                   onChange={handleInput}
                 />
               </div>
@@ -59,7 +60,8 @@ export default function SignIn() {
                 <input
                   type="password"
                   id="password"
-                  // value={user.password}
+                  name="password"
+                  value={user.password}
                   onChange={handleInput}
                 />
               </div>
@@ -77,7 +79,7 @@ export default function SignIn() {
           </section>
         </main>
         <Footer />
-      </body>
+      </section>
     </>
   );
 }
