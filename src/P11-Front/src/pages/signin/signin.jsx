@@ -44,13 +44,16 @@ export default function SignIn() {
       .then((response) => response.json())
       .then(function (data) {
         console.log(data);
-        window.location = "/user";
+        // ! problem with token fetch, and page redirection
         if (data.token) {
           window.sessionStorage.setItem("token", user.token);
+          window.location = "/user";
           console.log(user.token);
         }
       });
   };
+
+  // reponse du serveur renvoyer vers la route
 
   return (
     <>
