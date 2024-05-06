@@ -9,7 +9,7 @@ import security_icon from "./icon-security.png";
 export default function Home() {
   return (
     <>
-      <body>
+      <section>
         <Header />
         <main>
           <Hero />
@@ -38,7 +38,7 @@ export default function Home() {
           </section>
         </main>
         <Footer />
-      </body>
+      </section>
     </>
   );
 }

@@ -17,4 +17,4 @@ export default configureStore({
   },
 });
 
-//  todo: finish creating store
+//  todo: finish and explain store

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// todo: explain and create slice
+// todo: explain slice
 
 // Slice permet donc de définir les actions et le reducer qui va avec d’un seul coup
 

@@ -2,6 +2,8 @@ import "./signin.css";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/userSlice";
 
 // ?
 // au onsubmit si les bonne info sont renvoyé on recupere le token et on le stock dans le state global
@@ -9,7 +11,6 @@ import { useState } from "react";
 // puis dans le dashboard on recupere les transactions depuis le state
 // we need to initialise a state, that when is updated with a token from api fetch, redirectes to dashboard
 // we need to save the token state through out the app with redux, to than show transactions
-// todo: explain the whole component
 
 export default function SignIn() {
   // initialiser le state du user prenant en compte un objet
@@ -28,7 +29,11 @@ export default function SignIn() {
     setUser({ ...user, [name]: value });
   };
 
-  const submit = (e) => {
+  const dispatch = useDispatch();
+
+  // todo: token in dispatch
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     // objet recuperant le state du user avec les valeurs respectives pour le body de l'API
     const userValue = {
@@ -36,6 +41,13 @@ export default function SignIn() {
       password: user.password,
       token: user.token,
     };
+    dispatch(
+      login({
+        email: user.email,
+        password: user.password,
+        token: user.token,
+      })
+    );
     fetch(api_url, {
       method: "POST",
       body: JSON.stringify(userValue),
@@ -63,7 +75,7 @@ export default function SignIn() {
           <section className="sign-in-content">
             <i className="fa fa-user-circle sign-in-icon"></i>
             <h1>Sign In</h1>
-            <form onSubmit={submit}>
+            <form onSubmit={handleSubmit}>
               <div className="input-wrapper">
                 <label htmlFor="username">Username</label>
                 <input
