@@ -41,6 +41,7 @@ export default function SignIn() {
       password: user.password,
       token: user.token,
     };
+    // dispatch vers l'action.payload qui va mettre a jour le user state dans le reducer qui est pris en compte par le store
     dispatch(
       login({
         email: user.email,
