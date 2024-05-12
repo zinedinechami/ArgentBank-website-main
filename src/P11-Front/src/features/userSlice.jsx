@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // todo: mettre en place un selector dans le dashboard
+// todo: ajouter un clean up dans le reducer
 
 // SLICE DEF
 // permet de diviser un partie spécifique du state global de l'application, ici l'etat du user

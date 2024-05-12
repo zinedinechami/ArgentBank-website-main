@@ -4,6 +4,7 @@ import Footer from "../../components/footer/footer";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 // ?
 // au onsubmit si les bonne info sont renvoyé on recupere le token et on le stock dans le state global
@@ -30,6 +31,8 @@ export default function SignIn() {
   };
 
   const dispatch = useDispatch();
+
+  let navigate = useNavigate();
 
   // todo: token in dispatch
 
@@ -58,9 +61,9 @@ export default function SignIn() {
       .then(function (data) {
         console.log(data);
         // ! problem with token fetch, and page redirection
-        if (data.token) {
+        if (data) {
           window.sessionStorage.setItem("token", user.token);
-          window.location = "/user";
+          navigate("/user");
           console.log(user.token);
         }
       });
