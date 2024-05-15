@@ -1,10 +1,25 @@
 import "./user.css";
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
+import { useEffect } from "react";
 
 // create new header component with profile and sign out
 
+// todo: api fetch, and dispatch
+
 export default function User() {
+  const api_url = "http://localhost:3001/api/v1/user/profile";
+
+  useEffect(() => {
+    fetch(api_url)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  }, []);
+
   return (
     <>
       <section>

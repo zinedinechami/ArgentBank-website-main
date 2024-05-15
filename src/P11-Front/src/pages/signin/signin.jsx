@@ -2,8 +2,8 @@ import "./signin.css";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../features/userSlice";
+// import { useDispatch } from "react-redux";
+// import { login } from "../../features/userSlice";
 import { useNavigate } from "react-router-dom";
 
 // ?
@@ -30,7 +30,7 @@ export default function SignIn() {
     setUser({ ...user, [name]: value });
   };
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   let navigate = useNavigate();
 
@@ -45,13 +45,12 @@ export default function SignIn() {
       token: user.token,
     };
     // dispatch vers l'action.payload qui va mettre a jour le user state dans le reducer qui est pris en compte par le store
-    dispatch(
-      login({
-        email: user.email,
-        password: user.password,
-        token: user.token,
-      })
-    );
+    // dispatch(
+    //   login({
+    //     email: user.email,
+    //     token: user.token,
+    //   })
+    // );
     fetch(api_url, {
       method: "POST",
       body: JSON.stringify(userValue),
@@ -61,10 +60,12 @@ export default function SignIn() {
       .then(function (data) {
         console.log(data);
         // ! problem with token fetch, and page redirection
-        if (data) {
-          window.sessionStorage.setItem("token", user.token);
+        if (data.body.token) {
+          console.log("Token received:", data.body.token);
+          window.sessionStorage.setItem("token", data.body.token);
           navigate("/user");
-          console.log(user.token);
+        } else {
+          console.log("Erreur dans l'indetifiant ou le mot de passe");
         }
       });
   };
