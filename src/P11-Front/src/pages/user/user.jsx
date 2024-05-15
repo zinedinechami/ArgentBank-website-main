@@ -1,22 +1,45 @@
 import "./user.css";
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 
 // create new header component with profile and sign out
 
-// todo: api fetch, and dispatch
+// todo: add dispatch and selector for fetched data, map fetched data (name)
+
+// todo: create form to modify name
+
+// ? mettre en place un thunk middleware pour l'asynchrone
+
+// store name, last name and email in store
 
 export default function User() {
+  const [UserData, SetUserData] = useState("");
+
   const api_url = "http://localhost:3001/api/v1/user/profile";
 
+  const dispatch = useDispatch();
+
+  // recuperer le token du session storage
+  // mettre le token dans le header du api url
   useEffect(() => {
-    fetch(api_url)
+    const token = sessionStorage.getItem("token");
+
+    fetch(api_url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => {
         return res.json();
       })
       .then((data) => {
+        SetUserData(data.body);
         console.log(data);
+        dispatch(UserData);
       });
   }, []);
 
@@ -29,7 +52,7 @@ export default function User() {
             <h1>
               Welcome back
               <br />
-              Tony Jarvis!
+              {UserData?.firstName + UserData?.lastName}
             </h1>
             <button className="edit-button">Edit Name</button>
           </div>
