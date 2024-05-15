@@ -44,13 +44,6 @@ export default function SignIn() {
       password: user.password,
       token: user.token,
     };
-    // dispatch vers l'action.payload qui va mettre a jour le user state dans le reducer qui est pris en compte par le store
-    // dispatch(
-    //   login({
-    //     email: user.email,
-    //     token: user.token,
-    //   })
-    // );
     fetch(api_url, {
       method: "POST",
       body: JSON.stringify(userValue),
@@ -59,7 +52,6 @@ export default function SignIn() {
       .then((response) => response.json())
       .then(function (data) {
         console.log(data);
-        // ! problem with token fetch, and page redirection
         if (data.body.token) {
           console.log("Token received:", data.body.token);
           window.sessionStorage.setItem("token", data.body.token);

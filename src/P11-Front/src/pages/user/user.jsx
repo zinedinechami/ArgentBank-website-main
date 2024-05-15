@@ -2,17 +2,14 @@ import "./user.css";
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
 import { useDispatch } from "react-redux";
+import { login } from "../../features/userSlice";
 import { useEffect, useState } from "react";
 
 // create new header component with profile and sign out
 
-// todo: add dispatch and selector for fetched data, map fetched data (name)
+// todo: add selector
 
 // todo: create form to modify name
-
-// ? mettre en place un thunk middleware pour l'asynchrone
-
-// store name, last name and email in store
 
 export default function User() {
   const [UserData, SetUserData] = useState("");
@@ -39,7 +36,13 @@ export default function User() {
       .then((data) => {
         SetUserData(data.body);
         console.log(data);
-        dispatch(UserData);
+        dispatch(
+          login({
+            email: data.body.email,
+            firstName: data.body.firstName,
+            lastName: data.body.lastName,
+          })
+        );
       });
   }, []);
 
