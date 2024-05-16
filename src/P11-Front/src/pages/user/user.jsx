@@ -12,17 +12,19 @@ import { useEffect, useState } from "react";
 // todo: create form to modify name
 
 export default function User() {
+  const [openForm, setOpenForm] = useState(false);
+  const [nameForm, setNameForm] = useState({ userName: "" });
   const [UserData, SetUserData] = useState("");
 
   const api_url = "http://localhost:3001/api/v1/user/profile";
 
   const dispatch = useDispatch();
 
+  const token = sessionStorage.getItem("token");
+
   // recuperer le token du session storage
   // mettre le token dans le header du api url
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
-
     fetch(api_url, {
       method: "POST",
       headers: {
@@ -44,7 +46,30 @@ export default function User() {
           })
         );
       });
-  }, []);
+  }, [token, dispatch]);
+
+  const HandleInput = (e) => {
+    const { name, value } = e.target;
+    setNameForm({ ...nameForm, [name]: value });
+  };
+
+  const HandleSubmit = (e) => {
+    e.preventDeafault();
+    fetch(api_url, {
+      method: "PUT",
+      body: JSON.stringify(nameForm),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
   return (
     <>
@@ -55,9 +80,33 @@ export default function User() {
             <h1>
               Welcome back
               <br />
-              {UserData?.firstName + UserData?.lastName}
+              {UserData?.userName}
             </h1>
-            <button className="edit-button">Edit Name</button>
+            <div>
+              <button
+                onClick={() => setOpenForm((toggleOpen) => !toggleOpen)}
+                className="edit-button"
+              >
+                {" "}
+                Edit Name
+              </button>
+            </div>
+            {openForm && (
+              <div className="name_form--container">
+                {" "}
+                New User Name
+                <form action="" onSubmit={HandleSubmit}>
+                  {" "}
+                  <input
+                    name="userName"
+                    value={nameForm.userName}
+                    type="text"
+                    onChange={HandleInput}
+                  />
+                  <button className="edit-button"> Change UserName</button>
+                </form>
+              </div>
+            )}
           </div>
           <h2 className="sr-only">Accounts</h2>
           <section className="accounts">
