@@ -48,13 +48,12 @@ export default function User() {
       });
   }, [token, dispatch]);
 
-  const HandleInput = (e) => {
+  const handleInput = (e) => {
     const { name, value } = e.target;
     setNameForm({ ...nameForm, [name]: value });
   };
 
-  const HandleSubmit = (e) => {
-    e.preventDeafault();
+  const handleSubmit = () => {
     fetch(api_url, {
       method: "PUT",
       body: JSON.stringify(nameForm),
@@ -95,13 +94,13 @@ export default function User() {
               <div className="name_form--container">
                 {" "}
                 New User Name
-                <form action="" onSubmit={HandleSubmit}>
+                <form action="" onSubmit={handleSubmit}>
                   {" "}
                   <input
                     name="userName"
                     value={nameForm.userName}
                     type="text"
-                    onChange={HandleInput}
+                    onChange={handleInput}
                   />
                   <button className="edit-button"> Change UserName</button>
                 </form>
