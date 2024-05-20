@@ -1,6 +1,6 @@
 import "./user.css";
 import Footer from "../../components/footer/footer";
-import Header from "../../components/header/header";
+import header_logo from "./argentBankLogo.png";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
 import { useEffect, useState } from "react";
@@ -43,6 +43,7 @@ export default function User() {
             email: data.body.email,
             firstName: data.body.firstName,
             lastName: data.body.lastName,
+            userName: data.body.userName,
           })
         );
       });
@@ -73,7 +74,21 @@ export default function User() {
   return (
     <>
       <section>
-        <Header />
+        <nav className="main-nav">
+          <a className="main-nav-logo">
+            <img
+              className="main-nav-logo-image"
+              src={header_logo}
+              alt="Argent Bank Logo"
+            />
+          </a>
+          <div>
+            <a className="main-nav-item" href="/">
+              <i className="fa fa-user-circle"></i>
+              Sign Out
+            </a>
+          </div>
+        </nav>
         <main className="main bg-dark">
           <div className="header">
             <h1>
