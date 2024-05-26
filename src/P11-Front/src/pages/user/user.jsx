@@ -5,12 +5,6 @@ import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
 import { useEffect, useState } from "react";
 
-// create new header component with profile and sign out
-
-// todo: add selector
-
-// todo: create form to modify name
-
 export default function User() {
   const [openForm, setOpenForm] = useState(false);
   const [nameForm, setNameForm] = useState({ userName: "" });
@@ -22,8 +16,6 @@ export default function User() {
 
   const token = sessionStorage.getItem("token");
 
-  // recuperer le token du session storage
-  // mettre le token dans le header du api url
   useEffect(() => {
     fetch(api_url, {
       method: "POST",
