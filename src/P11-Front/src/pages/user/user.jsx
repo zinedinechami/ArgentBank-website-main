@@ -86,7 +86,7 @@ export default function User() {
           </a>
           <div>
             <a href="" className="main-nav-item">
-              {UserData?.firstName + UserData?.lastName}
+              {UserData?.firstName} {UserData?.lastName}
             </a>
             <button className="main-nav-item" onClick={handleLogout}>
               <i className="fa fa-user-circle"></i>
@@ -113,7 +113,7 @@ export default function User() {
             {openForm && (
               <div className="name_form--container">
                 {" "}
-                New User Name
+                New Username
                 <form action="" onSubmit={handleSubmit}>
                   {" "}
                   <input
@@ -122,7 +122,7 @@ export default function User() {
                     type="text"
                     onChange={handleInput}
                   />
-                  <button className="edit-button"> Change UserName</button>
+                  <button className="edit-button"> Change Username</button>
                 </form>
               </div>
             )}
