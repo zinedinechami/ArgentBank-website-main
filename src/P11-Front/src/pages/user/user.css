@@ -11,9 +11,24 @@ body {
   padding: 5px 20px;
 }
 
+.main-nav button {
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: large;
+  background: none;
+  outline: none;
+  border: none;
+  font-weight: bold;
+}
+
 .main-nav a {
   font-weight: bold;
   color: #2c3e50;
+  font-size: large;
+  background: none;
+  outline: none;
+  border: none;
+  font-weight: bold;
 }
 
 .main-nav a.router-link-exact-active {

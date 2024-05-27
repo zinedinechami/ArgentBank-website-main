@@ -3,7 +3,9 @@ import Footer from "../../components/footer/footer";
 import header_logo from "./argentBankLogo.png";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
+import { logout } from "../../features/userSlice";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function User() {
   const [openForm, setOpenForm] = useState(false);
@@ -13,6 +15,8 @@ export default function User() {
   const api_url = "http://localhost:3001/api/v1/user/profile";
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const token = sessionStorage.getItem("token");
 
@@ -63,6 +67,12 @@ export default function User() {
       });
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    sessionStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <>
       <section>
@@ -75,10 +85,13 @@ export default function User() {
             />
           </a>
           <div>
-            <a className="main-nav-item" href="/">
+            <a href="" className="main-nav-item">
+              {UserData?.firstName + UserData?.lastName}
+            </a>
+            <button className="main-nav-item" onClick={handleLogout}>
               <i className="fa fa-user-circle"></i>
               Sign Out
-            </a>
+            </button>
           </div>
         </nav>
         <main className="main bg-dark">
