@@ -15,6 +15,10 @@ export default function SignIn() {
     setUser({ ...user, [name]: value });
   };
 
+  const toggleError = () => {
+    setError((message) => !message);
+  };
+
   let navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -33,13 +37,14 @@ export default function SignIn() {
       .then((response) => response.json())
       .then(function (data) {
         console.log(data);
-        if (data.body.token) {
+        if (data.body && data.body.token) {
           console.log("Token received:", data.body.token);
           window.sessionStorage.setItem("token", data.body.token);
           navigate("/user");
         } else {
+          // ! error handling problem
           console.log("Erreur dans l'indetifiant ou le mot de passe");
-          setError(true);
+          toggleError();
         }
       });
   };
