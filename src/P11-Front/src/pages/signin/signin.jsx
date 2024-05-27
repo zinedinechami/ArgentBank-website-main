@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
   const [user, setUser] = useState({ email: "", password: "", token: "" });
+  const [error, setError] = useState(false);
   const api_url = "http://localhost:3001/api/v1/user/login";
 
   const handleInput = (e) => {
@@ -38,6 +39,7 @@ export default function SignIn() {
           navigate("/user");
         } else {
           console.log("Erreur dans l'indetifiant ou le mot de passe");
+          setError(true);
         }
       });
   };
@@ -77,6 +79,11 @@ export default function SignIn() {
               </div>
               <button className="sign-in-button">Sign In</button>
             </form>
+            {error && (
+              <div className="error__message">
+                An error occurred during login. Please try again.
+              </div>
+            )}
           </section>
         </main>
         <Footer />
