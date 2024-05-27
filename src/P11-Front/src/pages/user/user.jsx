@@ -113,7 +113,7 @@ export default function User() {
             {openForm && (
               <div className="name_form--container">
                 {" "}
-                New Username
+                <label htmlFor="">Username:</label>
                 <form action="" onSubmit={handleSubmit}>
                   {" "}
                   <input
@@ -122,7 +122,32 @@ export default function User() {
                     type="text"
                     onChange={handleInput}
                   />
-                  <button className="edit-button"> Change Username</button>
+                  <div>First name</div>
+                  <input
+                    value={UserData?.firstName}
+                    placeholder={UserData?.firstName}
+                    type="text"
+                    name=""
+                    id=""
+                    readOnly
+                  />
+                  <div>Last name</div>
+                  <input
+                    value={UserData?.lastName}
+                    placeholder={UserData?.lastName}
+                    type="text"
+                    name=""
+                    id=""
+                    readOnly
+                  />
+                  <button className="edit-button"> Save</button>
+                  <button
+                    className="edit-button"
+                    onClick={() => setOpenForm((toggleOpen) => !toggleOpen)}
+                  >
+                    {" "}
+                    Cancel
+                  </button>
                 </form>
               </div>
             )}
