@@ -40,6 +40,7 @@ export default function SignIn() {
         if (data.body && data.body.token) {
           console.log("Token received:", data.body.token);
           window.sessionStorage.setItem("token", data.body.token);
+
           navigate("/user");
         } else {
           // ! error handling problem
