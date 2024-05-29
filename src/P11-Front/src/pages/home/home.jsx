@@ -7,6 +7,8 @@ import money_icon from "./icon-money.png";
 import security_icon from "./icon-security.png";
 
 export default function Home() {
+  sessionStorage.removeItem("token");
+
   return (
     <>
       <section>

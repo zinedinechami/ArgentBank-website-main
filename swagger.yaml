@@ -1,9 +1,9 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
   title: Bank Argent API documentation
   description: Contains all available API endpoints in this codebase
-  version: "1.0.0"
-  termsOfService: "http://swagger.io/terms/"
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
 host: localhost:3001
 basePath: /api/v1
 schemes:
@@ -21,17 +21,17 @@ paths:
           description: Login Payload
           required: true
           schema:
-            $ref: "#/definitions/Login"
+            $ref: '#/definitions/Login'
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: Login Successfully
           schema:
-            $ref: "#/definitions/LoginResponse"
-        "400":
+            $ref: '#/definitions/LoginResponse'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
   /user/signup:
     post:
@@ -45,17 +45,17 @@ paths:
           description: Signup Payload
           required: true
           schema:
-            $ref: "#/definitions/User"
+            $ref: '#/definitions/User'
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: Signup Successfully
           schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
+            $ref: '#/definitions/ApiResponse'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
   /user/profile:
     post:
@@ -65,23 +65,21 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      produces:
-        - application/json
       responses:
-        "200":
+        '200':
           description: User profile retrieved successfully
           schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
+            $ref: '#/definitions/ApiResponse'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
     put:
       security:
         - Bearer: []
       tags:
         - User Module
-      summary: Update User Profile
+      summary: User Profile API
       description: API for updating a user profile
       parameters:
         - in: body
@@ -89,79 +87,91 @@ paths:
           description: Update user profile attributes
           required: true
           schema:
-            $ref: "#/definitions/UserProfile"
+            $ref: '#/definitions/UserProfile'
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: User profile updated successfully
           schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
+            $ref: '#/definitions/ApiResponse'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
-  /user/balance:
+  /transactions:
     get:
-      security:
-        - Bearer: []
       tags:
-        - User Module
-      summary: User Balance API
-      description: API for checking balance info
+        - Transactions Module
+      summary: Get all transactions
+      description: API to retrieve all transactions for the current month, grouped by account
       produces:
         - application/json
       responses:
-        "200":
-          description: User balance retrieved successfully
+        '200':
+          description: Transactions retrieved successfully
           schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
-          description: Invalid Fields
-        "500":
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal Server Error
+  /transactions/{transactionId}:
+    get:
+      tags:
+        - Transactions Module
+      summary: Get transaction by ID
+      description: API to retrieve a single transaction by ID
+      parameters:
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+          description: ID of the transaction to retrieve
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction details retrieved successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid request
+        '404':
+          description: Transaction not found
+        '500':
           description: Internal Server Error
     put:
-      security:
-        - Bearer: []
       tags:
-        - User Module
-      summary: Update User Balance
-      description: API to update user balance
+        - Transactions Module
+      summary: Update transaction
+      description: API to update the category or note of a transaction
       parameters:
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+          description: ID of the transaction to update
         - in: body
           name: body
-          description: Update user balance attributes
           required: true
+          description: Transaction update payload
           schema:
-            $ref: "#/definitions/UserBalance"
+            $ref: '#/definitions/TransactionUpdate'
       produces:
         - application/json
       responses:
-        "200":
-          description: User balance updated successfully
+        '200':
+          description: Transaction updated successfully
           schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
-          description: Invalid Fields
-        "500":
-          description: Internal Server Error
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: Post Note to Transaction
-      description: API to post a note to a transaction
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Note posted successfully
-          schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
-          description: Invalid Fields
-        "500":
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid request
+        '404':
+          description: Transaction not found
+        '500':
           description: Internal Server Error
 securityDefinitions:
   Bearer:
@@ -218,11 +228,13 @@ definitions:
     properties:
       userName:
         type: string
-      userBalance:
-        type: number
-  UserBalance:
+  Transaction:
     type: object
     properties:
+      id:
+        type: string
+      name:
+        type: string
       date:
         type: string
       description:
@@ -231,7 +243,16 @@ definitions:
         type: number
       balance:
         type: number
-      transaction:
+      transactionType:
         type: string
-
-#
+      category:
+        type: string
+      note:
+        type: string
+  TransactionUpdate:
+    type: object
+    properties:
+      category:
+        type: string
+      note:
+        type: string

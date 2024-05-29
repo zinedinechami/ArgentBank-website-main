@@ -33,7 +33,6 @@ export default function User() {
       })
       .then((data) => {
         SetUserData(data.body);
-        console.log(data);
         dispatch(
           login({
             email: data.body.email,
@@ -58,13 +57,9 @@ export default function User() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
+    }).then((res) => {
+      return res.json();
+    });
   };
 
   const handleLogout = () => {

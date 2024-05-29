@@ -36,15 +36,10 @@ export default function SignIn() {
     })
       .then((response) => response.json())
       .then(function (data) {
-        console.log(data);
         if (data.body && data.body.token) {
-          console.log("Token received:", data.body.token);
           window.sessionStorage.setItem("token", data.body.token);
-
           navigate("/user");
         } else {
-          // ! error handling problem
-          console.log("Erreur dans l'indetifiant ou le mot de passe");
           toggleError();
         }
       });
